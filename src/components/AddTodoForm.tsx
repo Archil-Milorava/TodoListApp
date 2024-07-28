@@ -1,14 +1,16 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import Button from "./Button";
+import { todosContext } from "../contexts/TodosContextProvider";
 
-interface AddTodoFormProps{
-  handleAddTodo: (todoText: string) => void,
-
+interface AddTodoFormProps {
+  handleAddTodo: (todoText: string) => void;
 }
 
-const  AddTodoForm: React.FC<AddTodoFormProps> = ({ handleAddTodo }) => {
+const AddTodoForm: React.FC<AddTodoFormProps> = () => {
   const [todoText, setTodoText] = useState("");
   const [error, setError] = useState("");
+
+  const { handleAddTodo, todos } = useContext(todosContext);
 
   const onFormSubmit = (e) => {
     e.preventDefault();
@@ -18,10 +20,15 @@ const  AddTodoForm: React.FC<AddTodoFormProps> = ({ handleAddTodo }) => {
     } else if (todoText.trim().length > 45 || todoText.trim().length <= 2) {
       setError("Text is too long/short");
       return;
+    } else if (todos.length === 5) {
+      setError(`List is loo long`);
+      setTodoText("");
+      return;
     }
     handleAddTodo(todoText);
     setTodoText("");
     setError("");
+    console.log(todos.length);
   };
 
   return (
@@ -38,10 +45,10 @@ const  AddTodoForm: React.FC<AddTodoFormProps> = ({ handleAddTodo }) => {
         type="text"
         className="h-10 w-full bg-white rounded-sm px-1 text-[#914F1E] border-none"
       />
-      {error && <p className="text-red-500 text-xs mt-1">{error}</p>}
       <Button>Add to list</Button>
+      {error && <p className="text-red-500 text-xs mt-1">{error}</p>}
     </form>
   );
-}
+};
 
 export default AddTodoForm;

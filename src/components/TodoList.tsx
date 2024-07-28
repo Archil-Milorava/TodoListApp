@@ -1,33 +1,20 @@
-import React from "react";
+import { useContext } from "react";
+import { todosContext } from "../contexts/TodosContextProvider";
 import TodoDeleteButton from "./TodoDeleteButton";
 
-type Todo = {
-  id: number;
-  text: string;
-  isCompleted: boolean;
-};
-
-interface todoListProps {
-  todos: Todo[]
-  setTodos: React.Dispatch<React.SetStateAction<Todo[]>>
-}
+function TodoList() {
+  const { todos,  toggleTodo, deleteTodo } = useContext(todosContext);
 
 
-const TodoList:React.FC<todoListProps> = ({ todos, setTodos }) => {
-  const toggleTodo = (id: number) => {
-    setTodos(
-      todos.map((todo) =>
-        todo.id === id ? { ...todo, isCompleted: !todo.isCompleted } : todo
-      )
-    );
-  };
-
-  const deleteTodo = (id: number) => {
-    setTodos(todos.filter((todo) => todo.id !== id));
-  };
 
   return (
-    <ul className={`bg-[#F7DCB9] col-[1/2] row-[2/3] max-w-full ${todos.length > 10 ? 'overflow-y-auto scrollbar-thin scrollbar-thumb-[#914F1E]/50 scrollbar-track-[#f6d1a0]  ' : ''}`}>
+    <ul
+      className={`bg-[#F7DCB9] col-[1/2] row-[2/3] max-w-full ${
+        todos.length > 10
+          ? "overflow-y-auto scrollbar-thin scrollbar-thumb-[#914F1E]/50 scrollbar-track-[#f6d1a0]  "
+          : ""
+      }`}
+    >
       {todos.length === 0 ? (
         <h1 className="mt-14 flex items-start justify-center h-full tracking-wide text-[#914F1E]/30 text-xl font-bold">
           What are you going to do?
