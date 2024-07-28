@@ -1,8 +1,16 @@
 import React from "react";
 
-function Header({todos}) {
+type Todo = {
+  id: number;
+  text: string;
+  isCompleted: boolean;
+};
 
+interface headerProps {
+  todos: Todo[]
+}
 
+const Header: React.FC<headerProps> = ({todos}) => {
 
 
   return (

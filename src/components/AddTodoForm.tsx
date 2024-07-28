@@ -1,7 +1,12 @@
 import React, { useState } from "react";
 import Button from "./Button";
 
-function AddTodoForm({ handleAddTodo }) {
+interface AddTodoFormProps{
+  handleAddTodo: (todoText: string) => void,
+
+}
+
+const  AddTodoForm: React.FC<AddTodoFormProps> = ({ handleAddTodo }) => {
   const [todoText, setTodoText] = useState("");
   const [error, setError] = useState("");
 

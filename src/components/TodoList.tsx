@@ -1,7 +1,20 @@
+import React from "react";
 import TodoDeleteButton from "./TodoDeleteButton";
 
-function TodoList({ todos, setTodos }) {
-  const toggleTodo = (id) => {
+type Todo = {
+  id: number;
+  text: string;
+  isCompleted: boolean;
+};
+
+interface todoListProps {
+  todos: Todo[]
+  setTodos: React.Dispatch<React.SetStateAction<Todo[]>>
+}
+
+
+const TodoList:React.FC<todoListProps> = ({ todos, setTodos }) => {
+  const toggleTodo = (id: number) => {
     setTodos(
       todos.map((todo) =>
         todo.id === id ? { ...todo, isCompleted: !todo.isCompleted } : todo
@@ -9,7 +22,7 @@ function TodoList({ todos, setTodos }) {
     );
   };
 
-  const deleteTodo = (id) => {
+  const deleteTodo = (id: number) => {
     setTodos(todos.filter((todo) => todo.id !== id));
   };
 
