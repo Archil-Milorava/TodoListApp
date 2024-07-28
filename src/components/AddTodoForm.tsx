@@ -20,7 +20,7 @@ const AddTodoForm: React.FC<AddTodoFormProps> = () => {
     } else if (todoText.trim().length > 45 || todoText.trim().length <= 2) {
       setError("Text is too long/short");
       return;
-    } else if (todos.length === 5) {
+    } else if (todos.length === 15) {
       setError(`List is loo long`);
       setTodoText("");
       return;

@@ -1,4 +1,4 @@
-import React, { createContext, useState } from "react";
+import React, { createContext, useEffect, useState } from "react";
 
 export type Todo = {
   id: number;
@@ -21,7 +21,14 @@ type TodosContextType = {
 export const todosContext = createContext<TodosContextType>(null);
 
 function TodosContextProvider({ children }: TodosContextProviderProps) {
-  const [todos, setTodos] = useState<Todo[]>([]);
+
+const todosFromLocalStorage = () => {
+  const resposne = localStorage.getItem('todos')
+  return JSON.parse(resposne)
+}
+
+
+  const [todos, setTodos] = useState<Todo[]>(todosFromLocalStorage);
 
   const handleAddTodo = (todoText: string) => {
     setTodos((prev) => [
@@ -45,6 +52,11 @@ function TodosContextProvider({ children }: TodosContextProviderProps) {
   const deleteTodo = (id: number) => {
     setTodos(todos.filter((todo) => todo.id !== id));
   };
+
+  //side effects
+  useEffect(() =>{
+    localStorage.setItem("todos", JSON.stringify(todos))
+  }, [todos])
 
   return (
     <todosContext.Provider
