@@ -6,5 +6,5 @@ export default {
       sans: ["Inter"],
     },
   },
-  plugins: [],
+  plugins: [require("tailwind-scrollbar")],
 };

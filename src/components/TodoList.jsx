@@ -14,7 +14,7 @@ function TodoList({ todos, setTodos }) {
   };
 
   return (
-    <ul className="bg-[#F7DCB9] col-[1/2] row-[2/3]">
+    <ul className={`bg-[#F7DCB9] col-[1/2] row-[2/3] max-w-full ${todos.length > 10 ? 'overflow-y-auto scrollbar-thin scrollbar-thumb-[#914F1E]/50 scrollbar-track-[#f6d1a0]  ' : ''}`}>
       {todos.length === 0 ? (
         <h1 className="mt-14 flex items-start justify-center h-full tracking-wide text-[#914F1E]/30 text-xl font-bold">
           What are you going to do?
@@ -24,11 +24,11 @@ function TodoList({ todos, setTodos }) {
           <li
             onClick={() => toggleTodo(todo.id)}
             key={todo.id}
-            className=" h-12  flex justify-between px-2 items-center border border-b-[#B5C18E]   hover:bg-[#f6d1a0] transition-all cursor-pointer"
+            className=" h-12 m-w-full    flex justify-between px-2 items-center border border-b-[#B5C18E]   hover:bg-[#f6d1a0] transition-all cursor-pointer"
           >
             <p
               style={{ transition: "all 0.3s ease" }}
-              className={`text-black/70 font-medium text-sm ${
+              className={`text-black/70 font-medium text-sm max-w-sm overflow-hidden  ${
                 todo.isCompleted ? "line-through text-gray-400/60" : ""
               }`}
             >

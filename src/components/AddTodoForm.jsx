@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Button from "./Button";
 
-function AddTodoForm({ todos, setTodos }) {
+function AddTodoForm({ handleAddTodo }) {
   const [todoText, setTodoText] = useState("");
   const [error, setError] = useState("");
 
@@ -10,15 +10,11 @@ function AddTodoForm({ todos, setTodos }) {
     if (todoText.trim() === "") {
       setError("Please enter a todo");
       return;
+    } else if (todoText.trim().length > 45 || todoText.trim().length <= 2) {
+      setError("Text is too long/short");
+      return;
     }
-    setTodos((prev) => [
-      ...prev,
-      {
-        id: prev.length ? prev[prev.length - 1].id + 1 : 1,
-        text: todoText,
-        isCompleted: false,
-      },
-    ]);
+    handleAddTodo(todoText);
     setTodoText("");
     setError("");
   };
