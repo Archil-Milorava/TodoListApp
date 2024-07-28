@@ -34,7 +34,7 @@ const AddTodoForm: React.FC<AddTodoFormProps> = () => {
   return (
     <form
       onSubmit={onFormSubmit}
-      className="text-sm flex flex-col items-center gap-2"
+      className="grow text-sm flex flex-col items-center space-y-4"
     >
       <h2 className="text-black/40 font-bold tracking-wider text-xl">
         Add Todo

@@ -9,7 +9,12 @@ function TodoList() {
 
   return (
     <ul
-      className={`bg-[#F7DCB9] col-[1/2] row-[2/3] max-w-full ${
+      className={
+        
+        `
+        h-4/6
+        
+        bg-[#F7DCB9] lg:h-full lg:col-[1/2] lg:row-[2/3] lg:max-w-full ${
         todos.length > 10
           ? "overflow-y-auto scrollbar-thin scrollbar-thumb-[#914F1E]/50 scrollbar-track-[#f6d1a0]  "
           : ""
