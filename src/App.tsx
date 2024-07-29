@@ -1,9 +1,7 @@
-import Header from "./components/Header";
-import TodoList from "./components/TodoList";
-import Section from "./components/Section";
 import Footer from "./components/Footer";
-import { useContext, useState } from "react";
-import { todosContext } from "./contexts/TodosContextProvider";
+import Header from "./components/Header";
+import Section from "./components/Section";
+import TodoList from "./components/TodoList";
 
 function App() {
 
