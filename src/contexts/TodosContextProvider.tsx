@@ -18,15 +18,13 @@ type TodosContextType = {
   deleteTodo: (id: number) => void;
 };
 
-export const todosContext = createContext<TodosContextType>(null);
+export const todosContext = createContext<TodosContextType | null>(null);
 
 function TodosContextProvider({ children }: TodosContextProviderProps) {
-
-const todosFromLocalStorage = () => {
-  const resposne = localStorage.getItem('todos')
-  return JSON.parse(resposne)
-}
-
+  const todosFromLocalStorage = () => {
+    const resposne = localStorage.getItem("todos");
+    return resposne ? JSON.parse(resposne) : [];
+  };
 
   const [todos, setTodos] = useState<Todo[]>(todosFromLocalStorage);
 
@@ -54,9 +52,9 @@ const todosFromLocalStorage = () => {
   };
 
   //side effects
-  useEffect(() =>{
-    localStorage.setItem("todos", JSON.stringify(todos))
-  }, [todos])
+  useEffect(() => {
+    localStorage.setItem("todos", JSON.stringify(todos));
+  }, [todos]);
 
   return (
     <todosContext.Provider
