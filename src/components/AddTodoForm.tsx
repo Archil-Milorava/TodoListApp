@@ -2,17 +2,15 @@ import React, { useContext, useState } from "react";
 import Button from "./Button";
 import { todosContext } from "../contexts/TodosContextProvider";
 
-interface AddTodoFormProps {
-  handleAddTodo: (todoText: string) => void;
-}
 
-const AddTodoForm: React.FC<AddTodoFormProps> = () => {
+
+function AddTodoForm() {
   const [todoText, setTodoText] = useState("");
   const [error, setError] = useState("");
 
   const { handleAddTodo, todos } = useContext(todosContext);
 
-  const onFormSubmit = (e) => {
+  const onFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (todoText.trim() === "") {
       setError("Please enter a todo");

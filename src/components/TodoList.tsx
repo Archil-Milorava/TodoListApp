@@ -39,7 +39,7 @@ function TodoList() {
             >
               {todo.text}
             </p>
-            <TodoDeleteButton onDelete={() => deleteTodo(todo.id)} />
+            <TodoDeleteButton id={todo.id} onDelete={() => deleteTodo(todo.id)} />
           </li>
         ))
       )}

@@ -1,9 +1,7 @@
-import { useContext } from "react"
 import AddTodoForm from "./AddTodoForm"
-import { todosContext } from "../contexts/TodosContextProvider"
+
 
 function Section() {
-  const {todos} = useContext(todosContext)
 
   
   

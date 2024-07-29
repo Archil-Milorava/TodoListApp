@@ -18,12 +18,20 @@ type TodosContextType = {
   deleteTodo: (id: number) => void;
 };
 
-export const todosContext = createContext<TodosContextType | null>(null);
+const defaultValue: TodosContextType = {
+  todos: [],
+  setTodos: () => {},
+  handleAddTodo: () => {},
+  toggleTodo: () => {},
+  deleteTodo: () => {},
+};
+
+export const todosContext = createContext<TodosContextType>(defaultValue);
 
 function TodosContextProvider({ children }: TodosContextProviderProps) {
   const todosFromLocalStorage = () => {
-    const resposne = localStorage.getItem("todos");
-    return resposne ? JSON.parse(resposne) : [];
+    const response = localStorage.getItem("todos");
+    return response ? JSON.parse(response) : [];
   };
 
   const [todos, setTodos] = useState<Todo[]>(todosFromLocalStorage);
@@ -40,18 +48,18 @@ function TodosContextProvider({ children }: TodosContextProviderProps) {
   };
 
   const toggleTodo = (id: number) => {
-    setTodos(
-      todos.map((todo) =>
+    setTodos((prev) =>
+      prev.map((todo) =>
         todo.id === id ? { ...todo, isCompleted: !todo.isCompleted } : todo
       )
     );
   };
 
   const deleteTodo = (id: number) => {
-    setTodos(todos.filter((todo) => todo.id !== id));
+    setTodos((prev) => prev.filter((todo) => todo.id !== id));
   };
 
-  //side effects
+  // Side effects
   useEffect(() => {
     localStorage.setItem("todos", JSON.stringify(todos));
   }, [todos]);
